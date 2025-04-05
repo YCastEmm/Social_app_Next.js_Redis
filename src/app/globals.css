@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    h2 {
+        @apply font-semibold;
+        @apply text-lg;
+    }
+
+    h3 {
+        @apply font-semibold;
+        @apply text-sm;
+    }
+
+    .button-primary{
+        @apply rounded-md;
+        @apply bg-blue-500;
+        @apply text-white;
+        @apply px-6;
+        @apply py-2;
+    }
+
+    .button-primary:hover{
+        @apply bg-blue-400;
+    }
+}
+
