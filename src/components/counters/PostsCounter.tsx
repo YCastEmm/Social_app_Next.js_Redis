@@ -10,10 +10,7 @@ const PostsCounter = ({count}: PostsCounterProp) => {
     return (
         <>
             <div>
-                <div>
-                    <h4></h4>
-                    <div></div>
-                </div>
+                {count} {label}
             </div>
         </>
     );

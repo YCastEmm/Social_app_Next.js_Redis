@@ -1,4 +1,5 @@
 import { MessageType } from "@/app/types/message.type";
+import Image from 'next/image'
 import Link from "next/link";
 
 type MessageProps = {
@@ -20,6 +21,14 @@ const Message = ({ message } : MessageProps) => {
                     </div>
                 </div>
                 <p className="text-xs">{message.message}</p>
+                <div>
+                    <Image
+                        src={"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGhlJTIwYmVhY2h8ZW58MHx8MHx8fDA%3D"}
+                        alt="Imagen de mensaje"
+                        width={100}
+                        height={100}
+                        />
+                </div>
             </div>
         </div>
     );

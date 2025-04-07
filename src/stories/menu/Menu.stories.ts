@@ -2,7 +2,7 @@ import Menu from "@/components/menu/Menu";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
-    title: "Menu/Message",
+    title: "Menu/Menu",
     component: Menu,
     parameters: {
         layout: "centered",

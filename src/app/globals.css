@@ -4,6 +4,19 @@
 
 
 @layer components {
+
+    body {
+        @apply font-body
+    }
+
+    h1, h2, h3 {
+        @apply font-title
+    }  
+    
+    h1 {
+        @apply text-lg;
+    }  
+
     h2 {
         @apply font-semibold;
         @apply text-lg;
@@ -25,5 +38,16 @@
     .button-primary:hover{
         @apply bg-blue-400;
     }
+
+    .link-primary{
+        @apply text-blue-500;
+        @apply font-semibold;
+        @apply cursor-pointer
+    }
+
+    .link-primary:hover{
+        @apply text-blue-400;
+    }
+
 }
 

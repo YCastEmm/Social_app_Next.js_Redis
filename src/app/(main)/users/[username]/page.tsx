@@ -1,10 +1,13 @@
-import Message from "@/components/messages/Message";
 import UserTab from "@/components/users/UserTabs";
-import Link from "next/link";
+import Image from 'next/image'
+import avatarImg from '../../../../../public/avatar.webp'
 
-const UserPage = ({ params }: { params: { username: string } }) => {
+const UserPage = async ({ params }: { params: Promise<{ username: string }> }) => {
+    
+    const {username} = await params
+    
     const user = {
-        username: params.username,
+        username,
         initials: "AS",
         name: "Anakin Skywalker",
         bio: "Vengo de Tatooine",
@@ -37,9 +40,18 @@ const UserPage = ({ params }: { params: { username: string } }) => {
     return (
         <main className="flex flex-col bg-gray-100 p-8">
             <section className="flex flex-col mb-8">
-                <div className="rounded-full bg-gray-300 w-20 p-6 font-bold text-lg text-center mb-3">{user.initials}</div>
+                <div className="rounded-full mb-3 block relative w-20 h-20">
+                <Image
+                    className="rounded-full"
+                    src={avatarImg}
+                    alt="Imagen de perfil"
+                    fill
+                    priority
+                    placeholder="blur" // Optional blur-up while loading
+                    />
+                </div>
                 <h2>{user.name}</h2>
-                <div className="font-semibold text-gray-600 text-lg mb-1">@{params.username}</div>
+                <div className="font-semibold text-gray-600 text-lg mb-1">@{username}</div>
                 <div className="my-3">{user.bio}</div>
                 <div className="flex justify-between">
                     <div className="font-semibold">{user.followersCount} Seguidores</div>
