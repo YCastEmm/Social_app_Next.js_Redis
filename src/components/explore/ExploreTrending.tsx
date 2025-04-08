@@ -1,10 +1,10 @@
 import Link from "next/link";
 import PostsCounter from "../counters/PostsCounter";
-import { Hashtag } from "@/app/types/hash.types";
+import { HashtagType } from "@/app/types/hash.types";
 
 
 type ExploreTrendingProps = {
-    hashes: Hashtag[]
+    hashes: HashtagType[]
 }
 
 
@@ -14,12 +14,12 @@ const ExploreTrending = ({hashes} : ExploreTrendingProps) => {
     }
 
     return (
-        <div className="bg-gray-100 rounded-lg px-5 py-3" style={{minWidth: 240}}>
+        <div className="bg-gray-200 rounded-lg px-5 py-3" style={{minWidth: 240}}>
             <h2 className="mb-2">Trending</h2>
             {hashes.slice(0,2).map((hash, index) => (
                 <div className="mb-2" key={index}>
-                    <Link href="/messages?query=Tatooine&type=hash">
-                        <h4 className="font-semibold p-1">#{hash.hash}</h4>
+                    <Link href={`/messages?query=${hash.hash}&type=hash`}>
+                        <h4 className="font-semibold p-1">{hash.hash}</h4>
                     </Link>
                     <div className="px-1">
                         <PostsCounter count={hash.count} />
