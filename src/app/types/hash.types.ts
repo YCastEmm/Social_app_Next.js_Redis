@@ -1,4 +1,4 @@
-export type Hashtag = {
+export type HashtagType = {
     hash: string,
     count: number
 }
