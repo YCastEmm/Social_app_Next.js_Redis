@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mulish, Alegreya } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/layout/Navbar";
 
 const mulish = Mulish({
     subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${mulish.variable} ${alegreya.variable}`}>
             <body suppressHydrationWarning>                
+                <Navbar></Navbar>
                 {children}
             </body>
         </html>

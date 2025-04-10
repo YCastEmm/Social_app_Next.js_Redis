@@ -9,12 +9,23 @@
         @apply font-body
     }
 
-    h1, h2, h3 {
-        @apply font-title
-    }  
-    
+    main{
+        @apply w-full;
+        @apply flex;
+        @apply flex-col;
+        @apply justify-center;
+    }
+
+    section{
+        @apply px-4;
+        @apply w-full;
+
+    }
+       
     h1 {
-        @apply text-lg;
+        @apply text-xl;
+        @apply font-bold;
+
     }  
 
     h2 {
