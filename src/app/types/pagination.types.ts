@@ -1,13 +1,10 @@
 export type PaginationType = {
-	"content": [],
-	"pagination": {
-		"totalPages": number,
-		"totalElements": number,
-		"page": number,
-		"size": number,
-		"first": boolean,
-		"last": boolean
-	}
+    "totalPages": number,
+    "totalElements": number,
+    "page": number,
+    "size": number,
+    "first": boolean,
+    "last": boolean
 }
 
 export type PageType<T> = {
