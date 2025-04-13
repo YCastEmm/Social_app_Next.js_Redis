@@ -3,7 +3,7 @@ import messageAPI from "@/services/messages/messages.service";
 
 const MessagesPage = async () => {
 
-    const messagesResponse = await messageAPI.getMessageFeed(0, 10);
+    const messagesResponse = await messageAPI.getMessageFeed(0, 20);
 
     const fetchData = () =>{
 

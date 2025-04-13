@@ -21,7 +21,7 @@ const MessageFeed = ({ initialMessages }: MessageFeedProps) => {
 
     const fetchData = async () =>{
         const page = messagesResponse.pagination.page + 1
-        const response = await  messageAPI.getMessageFeed(page + 1, 10)
+        const response = await  messageAPI.getMessageFeed(page, 10)
         setMessagesResponse(response)
         setMessages([...messages, ...response.content])
         setHasMore(!response.pagination.last)

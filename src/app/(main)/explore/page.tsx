@@ -17,8 +17,8 @@ const ExplorePage = async ({ searchParams }: { searchParams: Promise<Record<stri
         <main className="flex flex-col bg-gray-100 p-8">
             <section className="flex flex-col mb-8">
                 <ExploreTabs
-                    hashtags={hashes.content}
-                    users={users.content}
+                    hashtags={hashes}
+                    users={users}
                     initialTab={params?.type} />
             </section>
         </main>
