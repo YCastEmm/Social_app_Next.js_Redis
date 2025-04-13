@@ -1,4 +1,5 @@
 import MessageFeed from "@/components/messages/MessageFeed";
+import MessagePostForm from "@/components/messages/MessagePostForm";
 import messageAPI from "@/services/messages/messages.service";
 
 const MessagesPage = async () => {
@@ -12,6 +13,7 @@ const MessagesPage = async () => {
     return (
         <main className="flex flex-col bg-gray-100 p-8">
             <section className="flex flex-col mb-8">
+                <MessagePostForm></MessagePostForm>                
                 <MessageFeed initialMessages={messagesResponse}></MessageFeed>
             </section>
         </main>
