@@ -19,7 +19,7 @@ const UserTab = ({ messages, replies }: UserTabsProp) => {
 
     return (
         <>
-            <div className="flex justify-evenly mb-5">
+            <div className="flex justify-evenly mb-5 w-full">
                 <div 
                     onClick={() =>setTab(TabView.MESSAGES)}
                     className={`cursor-pointer ${tab === TabView.MESSAGES ? "border-b-2 border-blue-400" : ""}`}>
@@ -31,7 +31,7 @@ const UserTab = ({ messages, replies }: UserTabsProp) => {
                     Respuestas
                 </div>
             </div>
-            <div>
+            <div className="flex flex-col w-full">
                 {tab === TabView.MESSAGES && messages.map((message, index) => <Message key={index} message={message} />)}
                 {tab === TabView.REPLIES && replies.map((message, index) => <Message key={index} message={message} />)}
                 <div />

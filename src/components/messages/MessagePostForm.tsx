@@ -1,18 +1,22 @@
 "use client"
 
-import { httpPost } from "@/services/common/http.service";
 import messageAPI from "@/services/messages/messages.service";
 import Image from "next/image";
 import { useEffect } from "react";
 // Importo el hook principal de React Hook Form
 import { useForm } from "react-hook-form";
 
+type MessagePostFormType = {
+    parentId?: string
+}
+
+
 // Defino el tipo de datos que espero en el formulario
 type FormData = {
     message: string
 }
 
-const MessagePostForm = ({}) => {
+const MessagePostForm = ({parentId} : MessagePostFormType) => {
 
     // Inicializo el hook de formulario
     // register: para vincular los inputs
@@ -28,7 +32,7 @@ const MessagePostForm = ({}) => {
 
     // Función que se ejecuta al hacer submit del form
     const onSubmit = async (data: FormData) =>{
-        const reponse = await messageAPI.postMessage(data.message)
+        const reponse = await messageAPI.postMessage(data.message, parentId)
         console.log(reponse);
         resetField("message") // limpio el campo después de enviar
         setFocus("message")   // vuelvo a enfocar el textarea
@@ -51,7 +55,7 @@ const MessagePostForm = ({}) => {
                     <textarea 
                         rows={4} 
                         placeholder="¿Qué estás pensando?"
-                        className="p-3 w-full mb-4 rounded bg-gray-50 border-2 border-gray-100 resize-none"
+                        className="p-3 w-full mb-4 rounded bg-gray-50 border-2 border-gray-200 resize-none focus:border-blue-300 focus:outline-none"
                         // Uso el register para conectar el textarea al form
                         {...register("message", {
                             required: true, // valido que sea obligatorio

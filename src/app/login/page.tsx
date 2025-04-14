@@ -1,6 +1,10 @@
-const LoginPage = () => { 
-    return <div>Inicio de sesión</div>
- }
+import LoginForm from "@/components/auth/LoginForm"
 
 
- export default LoginPage
+const LoginPage = () => {
+    return  <LoginForm />
+
+
+};
+
+export default LoginPage;
