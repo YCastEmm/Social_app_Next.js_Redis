@@ -12,7 +12,7 @@ type MessageHashtagProps = {
 const MessageHashtag = ({hash}: MessageHashtagProps) => {
     return (
         <>
-            <Link href={`/messages?query=${hash.hash}&type=hash`}>
+            <Link href={`/?query=${hash.hash?.replace("#","") ?? ""}&type=hash`}>
                 <h4 className="font-semibold p-1">{hash.hash}</h4>
             </Link>
             <div className="px-1">

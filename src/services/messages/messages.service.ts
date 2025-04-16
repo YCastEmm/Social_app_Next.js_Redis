@@ -17,7 +17,11 @@ class MessageApi {
 
     postMessage = async ( message: string, parentId?: string) : Promise<MessageType> => {
         return httpPost("/messages", { message: message, parentId: parentId ?? null })}
+
+    getMessageByHash = async ( hashtag: string, page: number, size: number) : Promise<PageType<MessageType>> => {
+        return httpGetPublic(`/messages/hash/${hashtag}`,  new URLSearchParams({page: `${page}`, size: `${size}`}))}
 }
+
 
 
 const messageAPI = new MessageApi()
