@@ -1,5 +1,6 @@
 "use client"
 
+import useMessages from "@/contexts/message.context";
 import messageAPI from "@/services/messages/messages.service";
 import Image from "next/image";
 import { useEffect } from "react";
@@ -18,6 +19,8 @@ type FormData = {
 
 const MessagePostForm = ({parentId} : MessagePostFormType) => {
 
+    const {postMessage} = useMessages()
+
     // Inicializo el hook de formulario
     // register: para vincular los inputs
     // handleSubmit: para manejar el submit
@@ -28,12 +31,11 @@ const MessagePostForm = ({parentId} : MessagePostFormType) => {
     // Apenas se monta el componente, enfoco el textarea
     useEffect(()=>{
         setFocus("message")        
-    },[])
+    },[setFocus])
 
     // Función que se ejecuta al hacer submit del form
     const onSubmit = async (data: FormData) =>{
-        const reponse = await messageAPI.postMessage(data.message, parentId)
-        console.log(reponse);
+        await postMessage(data.message, parentId)
         resetField("message") // limpio el campo después de enviar
         setFocus("message")   // vuelvo a enfocar el textarea
     }

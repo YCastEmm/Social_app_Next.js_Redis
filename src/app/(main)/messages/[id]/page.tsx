@@ -1,6 +1,7 @@
-import Message from "@/components/messages/Message";
-import MessagePostForm from "@/components/messages/MessagePostForm";
+
+
 import messageAPI from "@/services/messages/messages.service";
+import MessagePageContainer from "./page.container";
 
 const MessagePage = async ({ params }: { params: Promise<{ id: string, parentId: string }> }) => {
     const { id } = await params;
@@ -13,17 +14,11 @@ const MessagePage = async ({ params }: { params: Promise<{ id: string, parentId:
 
     return (
         <main className="flex flex-col bg-gray-100 p-8">
-            <section className="flex flex-col mb-8">
-                <Message message={message} />
-            </section>
-            <section>
-                <MessagePostForm parentId={id}></MessagePostForm>                
-            </section>
-            <section className="flex flex-col w-full">
-                {repliesPage.content.map((message, index) => (
-                    <Message key={index} message={message} />
-                ))}
-            </section>
+            <MessagePageContainer 
+                message={message} 
+                parentId={id}
+                repliesPage={repliesPage}
+            />
         </main>
     );
 };
