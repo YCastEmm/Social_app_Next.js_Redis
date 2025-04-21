@@ -11,10 +11,13 @@ export class HttpBaseApi {
         this.publicEndpointSuffix = publicEndpointSuffix
     }
 
-    async httpGet<T> (endpointSuffix : string, params?: URLSearchParams) : Promise<T> {
+    async httpGet<T> (endpointSuffix : string, params?: URLSearchParams, accessToken?: string): Promise<T> {
         const res = await fetch(`${this.privateEndpoint}${endpointSuffix}${params ? `?${params}` : "" }`,
             {   
-                cache: "no-cache"
+                cache: "no-cache",
+                headers: !accessToken ? {"Content-Type" : "application/json"} 
+                :   {"Content-Type" : "application/json",
+                    "Authorization": `Bearer ${accessToken}`}
             })
         if (!res.ok) {
             throw new Error("Falló el httpGet en el endpoint: "+ endpointSuffix)
@@ -27,11 +30,13 @@ export class HttpBaseApi {
     }
     
 
-    async httpPost<T>(endpointSuffix : string, body: object) : Promise<T> { 
+    async httpPost<T>(endpointSuffix : string, body: object, accessToken?: string) : Promise<T> { 
         const res = await fetch(`${this.privateEndpoint}${endpointSuffix}`,
             {
                 method: "POST",
-                headers: {"Content-Type" : "application/json"},
+                headers: !accessToken ? {"Content-Type" : "application/json"} 
+                :   {"Content-Type" : "application/json",
+                    "Authorization": `Bearer ${accessToken}`},
                 body: JSON.stringify(body)
             })
     
