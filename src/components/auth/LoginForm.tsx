@@ -7,6 +7,11 @@ import * as yup from "yup" // Librería para validaciones por esquema
 
 import SubmitButton from "../form/SubmitButton"
 import InputText from "../form/InputText"
+import httpExternalApi from "@/services/common/http.external.service"
+import authApi from "@/services/auth/auth.service"
+import { AccessDeniedError } from "@/services/common/errors"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 // Tipo que define los campos del formulario
 type FormData = {
@@ -23,6 +28,10 @@ const schema = yup
     .required()
 
 const LoginForm = () => {
+
+    const router = useRouter()
+    const [serverError, setServerError] = useState<string | null>(null)
+
     // Inicializo React Hook Form con Tipado y validación con Yup
     const methods = useForm<FormData>({
         resolver: yupResolver(schema), // Le paso el esquema para que se use en las validaciones
@@ -32,8 +41,19 @@ const LoginForm = () => {
     const { handleSubmit } = methods
 
     // Esta función se ejecuta si los datos pasan la validación
-    const onSubmit = (data: FormData) => {
-        console.log(JSON.stringify(data))
+    const onSubmit = async (data: FormData) => {
+        setServerError(null)
+        try {
+            const loginResponse = await authApi.login(data.username, data.password)
+            console.log(loginResponse)
+            router.push("/")
+        } catch (error) {
+            if (error instanceof AccessDeniedError) {
+                setServerError("Las credenciales ingresadas son inválidas.")
+            } else {
+                setServerError("Ha ocurrido un error. Intente nuevamente más tarde.")
+            }
+        }
     }
 
     return (
@@ -62,6 +82,9 @@ const LoginForm = () => {
                         onSubmit={onSubmit}
                         styles=""
                     />
+                    {serverError && 
+                    <div  className="text-red-600 mt-4">{serverError}</div>
+                    }
                 </form>
             </FormProvider>
         </div>

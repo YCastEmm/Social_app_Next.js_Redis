@@ -1,6 +1,6 @@
 "use client"
 
-import { MessageType } from "@/app/types/message.type";
+import { MessageType } from "@/types/message.type";
 import UserCard, { UserCardLayout } from "../users/UserCard";
 import RepliesCounter from "../counters/RepliesCounter";
 import { useRouter } from "next/navigation";

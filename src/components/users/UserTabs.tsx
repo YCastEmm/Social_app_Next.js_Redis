@@ -1,6 +1,6 @@
 "use client"
 
-import { MessageType } from "@/app/types/message.type";
+import { MessageType } from "@/types/message.type";
 import Message from "../messages/Message";
 import { useState } from "react";
 

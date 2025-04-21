@@ -1,4 +1,4 @@
-import { TrendingUserType, UserType } from "@/app/types/user.types";
+import { TrendingUserType, UserType } from "@/types/user.types";
 
 import Image from "next/image";
 import Link from "next/link";

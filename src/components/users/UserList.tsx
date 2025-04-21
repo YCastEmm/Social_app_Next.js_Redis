@@ -1,9 +1,9 @@
 import exploreApi from "@/services/explore/explore.service";
 import InfiniteScroll from "react-infinite-scroll-component";
 import UserCard, { UserCardLayout } from "./UserCard";
-import { TrendingUserType, UserType } from "@/app/types/user.types";
+import { TrendingUserType, UserType } from "@/types/user.types";
 import { useState } from "react";
-import { PageType } from "@/app/types/pagination.types";
+import { PageType } from "@/types/pagination.types";
 
 
 type UserListProps = {

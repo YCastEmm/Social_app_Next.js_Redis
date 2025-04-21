@@ -1,4 +1,4 @@
-import { FAQPageType } from "@/app/types/faq.types";
+import { FAQPageType } from "@/types/faq.types";
 import { FAQCard } from "./FAQCard";
 
 type FAQSectionProps = {

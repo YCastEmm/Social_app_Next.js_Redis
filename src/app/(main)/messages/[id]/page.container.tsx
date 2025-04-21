@@ -5,8 +5,8 @@
 // y luego pasarle los datos ya cargados a este contenedor interactivo.
 
 
-import { MessageType } from "@/app/types/message.type";
-import { PageType } from "@/app/types/pagination.types";
+import { MessageType } from "@/types/message.type";
+import { PageType } from "@/types/pagination.types";
 import Message from "@/components/messages/Message";
 import MessageList from "@/components/messages/MessageList";
 import MessagePostForm from "@/components/messages/MessagePostForm";

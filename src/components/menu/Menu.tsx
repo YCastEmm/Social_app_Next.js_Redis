@@ -1,4 +1,4 @@
-import { LinkType } from "@/app/types/link.types";
+import { LinkType } from "@/types/link.types";
 import Link from "next/link";
 
 type MenuProps = {

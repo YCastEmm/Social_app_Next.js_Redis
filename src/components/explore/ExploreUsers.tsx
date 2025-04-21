@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { TrendingUserType } from "@/app/types/user.types";
+import { TrendingUserType } from "@/types/user.types";
 import UserCard, { UserCardLayout } from "../users/UserCard";
 
 type ExploreUsersProps = {

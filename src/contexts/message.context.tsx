@@ -1,5 +1,5 @@
-import { MessageType } from "@/app/types/message.type";
-import { PageType } from "@/app/types/pagination.types";
+import { MessageType } from "@/types/message.type";
+import { PageType } from "@/types/pagination.types";
 import messageAPI from "@/services/messages/messages.service";
 import { createContext, FC, PropsWithChildren, useCallback, useContext, useEffect, useMemo, useState } from "react";
 

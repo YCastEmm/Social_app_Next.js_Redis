@@ -1,13 +1,13 @@
 "use client"
 
-import { TrendingHashtagType } from "@/app/types/hash.types";
-import { TrendingUserType } from "@/app/types/user.types";
+import { TrendingHashtagType } from "@/types/hash.types";
+import { TrendingUserType } from "@/types/user.types";
 import { useEffect, useState } from "react";
 import MessageHashtag from "../messages/MessageHashtag";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import UserList from "../users/UserList";
-import { PageType } from "@/app/types/pagination.types";
+import { PageType } from "@/types/pagination.types";
 import MessageHasthtagList from "../messages/MessageHashtagList";
 
 enum TabView {
