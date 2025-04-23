@@ -15,8 +15,6 @@ const UserPageContainerAsync = async ({username}: UserPageContainerProps) => {
     
     const [user, userMessages, userReplies] = await Promise.all([userPromise, userMessagesPromise, userRepliesPromise])
 
-    console.log(user);
-    
     return (
         <main className="flex flex-col bg-gray-100 p-8">
             <section className="flex flex-col mb-8">

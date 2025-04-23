@@ -37,7 +37,7 @@ export async function POST(request: Request){
         const now = new Date()
         const expireAt = new Date(now.getTime() + TEN_MINUTES * 1000).toUTCString()
 
-        const authCookie = `SocialSessionID=${sessionId}; Expires=${expireAt}Domain=localhost; Secure; HttpOnly`
+        const authCookie = `SocialSessionID=${sessionId}; Expires=${expireAt}; Domain=localhost; Secure; HttpOnly; Path=/`
 
         return new Response(JSON.stringify(loginResponse.user), {
             status: 200,
