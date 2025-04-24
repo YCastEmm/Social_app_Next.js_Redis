@@ -2,6 +2,7 @@ import ExploreTrending from "@/components/explore/ExploreTrending";
 import ExploreUsers from "@/components/explore/ExploreUsers";
 import Menu from "@/components/menu/Menu";
 import exploreApi from "@/services/explore/explore.service";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { FC, PropsWithChildren } from "react";
 
@@ -18,7 +19,7 @@ const UsersLayout: FC<PropsWithChildren> = async ({ children }) => {
     const usersPromise = exploreApi.getFollowRecommendations(0, 5)
 
     const [hashes, users ] = await Promise.all([hashesPromise, usersPromise])
-
+    
     return (
         <div  className="w-full h-full grid grid-cols-12 gap-4 px-4">
             <div className="col-span-2">

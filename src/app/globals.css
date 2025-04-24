@@ -2,31 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
-
     body {
-        @apply font-body
+        @apply font-body;
     }
 
-    main{
+    main {
         @apply w-full;
         @apply flex;
         @apply flex-col;
         @apply items-center;
     }
 
-    section{
+    section {
         @apply px-4;
         @apply w-full;
-
     }
-       
+
     h1 {
         @apply text-xl;
         @apply font-bold;
-
-    }  
+    }
 
     h2 {
         @apply font-semibold;
@@ -38,7 +34,7 @@
         @apply text-sm;
     }
 
-    .button-primary{
+    .button-primary {
         @apply rounded-md;
         @apply bg-blue-500;
         @apply text-white;
@@ -46,19 +42,29 @@
         @apply py-2;
     }
 
-    .button-primary:hover{
+    .button-primary:hover {
         @apply bg-blue-400;
     }
 
-    .link-primary{
+    .button-secondary {
+        @apply rounded-md;
+        @apply bg-gray-50;
+        @apply text-blue-500;
+        @apply px-6;
+        @apply py-2;
+    }
+
+    .button-secondary:hover {
+        @apply bg-gray-200;
+    }
+
+    .link-primary {
         @apply text-blue-500;
         @apply font-semibold;
-        @apply cursor-pointer
+        @apply cursor-pointer;
     }
 
-    .link-primary:hover{
+    .link-primary:hover {
         @apply text-blue-400;
     }
-
 }
-

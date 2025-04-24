@@ -1,18 +1,42 @@
-import Link from "next/link"
+"use client"
 
-const Navbar = () => { 
+import authApi from "@/services/auth/auth.api"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+
+type NavbarProps = {
+    loggedUsername?: string | null
+}
+
+const Navbar = ({loggedUsername} : NavbarProps) => { 
     
-    return      <header className="w-full">
-                    <nav className="w-full bg-blue-500 text-white p-4 mb-2">
+    const router = useRouter()
+
+    const logout = async() =>{
+        await authApi.logout()
+        router.push("/login")
+        router.refresh()
+    }
+
+    return  <header className="w-full">
+                <nav className="flex justify-between w-full bg-blue-500 text-white p-4 mb-2">
+                    <div>
+                        <Link href="/explore">
+                            <div className="px-4">
+                                Logo
+                            </div>
+                        </Link>
+                    </div>
+                    {
+                        loggedUsername && 
                         <div>
-                            <Link href="/explore">
-                                <div className="px-4">
-                                    Logo
-                                </div>
-                            </Link>
+                            <button className="button-secondary" onClick={() =>logout()}>
+                                Cerrar sesión
+                            </button>
                         </div>
-                    </nav>
-                </header>
+                    }
+                </nav>
+            </header>
 
 }
 

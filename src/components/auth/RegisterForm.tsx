@@ -3,10 +3,14 @@
 import { FormProvider, useForm } from "react-hook-form"
 // Adaptador para que React Hook Form use validaciones con Yup
 import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup" // Librería de validación por esquema
 
 import SubmitButton from "../form/SubmitButton"
 import InputText from "../form/InputText"
+import { RegisterSchema } from "@/schemas/register.schema"
+import authApi from "@/services/auth/auth.api"
+import { ConflictError } from "@/services/common/errors"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 // Tipo que define los campos del formulario
 type FormData = {
@@ -16,29 +20,35 @@ type FormData = {
     photoUrl: string,
 }
 
-// Defino el esquema de validación con Yup
-const schema = yup.object({
-    username: yup.string().required(),     // obligatorio
-    password: yup.string().required(),     // obligatorio
-    name: yup.string().required(),         // obligatorio
-    photoUrl: yup.string().required(),     // obligatorio
-}).required()
 
 const RegisterForm = () => {
 
-    // Inicializo el form con los métodos de React Hook Form
-    // - useForm devuelve métodos útiles como register, handleSubmit, formState, etc.
-    // - Le paso yupResolver(schema) para que use Yup en la validación
+    const router = useRouter()
+    const [serverError, setServerError] = useState<string | null>(null)
+    
+
     const methods = useForm<FormData>({
-        resolver: yupResolver(schema)
+        resolver: yupResolver(RegisterSchema)
     })
 
     // Extraigo lo que voy a usar directamente (opcional)
     const { register, handleSubmit, formState: { errors } } = methods
 
     // Esta función se ejecuta solo si la validación pasó
-    const onSubmit = (data: FormData) => {
-        console.log(JSON.stringify(data));
+    const onSubmit = async (data: FormData) => {
+        setServerError(null)
+        try {
+            const loginResponse = await authApi.register(data.username, data.password, data.name, data.photoUrl)
+            console.log(loginResponse)
+            router.push("/")
+            router.refresh()
+        } catch (error) {
+            if (error instanceof ConflictError) {
+                setServerError("El nombre de usuario ya existe.")
+            } else {
+                setServerError("Ha ocurrido un error. Intente nuevamente más tarde.")
+            }
+        }
     }
 
     return (
@@ -77,6 +87,7 @@ const RegisterForm = () => {
                     <SubmitButton
                         label={"Registrarse"}
                         onSubmit={onSubmit} />
+                    {serverError && <div  className="text-red-600 mt-4">{serverError}</div>}
                 </form>
 
             </FormProvider>

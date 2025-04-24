@@ -25,22 +25,8 @@ class AuthService {
 
 
     async authenticate(username: string, password: string) : Promise<AuthResponseType> {
-        
-            
         const loginResponse = await authApi.loginInternal(username, password)
-        const sessionId = uuidv4()  
-        const now = new Date()
-        const expireAt = new Date(now.getTime() + TEN_MINUTES * 1000).toUTCString()
-
-        this.client.set(sessionId, loginResponse.accessToken, {
-            EX: TEN_MINUTES
-        })
-
-        return {
-            sessionId, 
-            user: loginResponse.user,
-            expireAt
-        }            
+        return this.buildAuthResponse(loginResponse)          
     }
 
     async getAccessToken(sessionId: string) : Promise<string> {
@@ -57,6 +43,31 @@ class AuthService {
 
     async getRedisValue(key: string) : Promise<string |  null> {
         return await this.client.get(key)
+    }
+
+    buildAuthResponse(loginResponse: LoginResponseType): AuthResponseType{
+        const sessionId = uuidv4()  
+        const now = new Date()
+        const expireAt = new Date(now.getTime() + TEN_MINUTES * 1000).toUTCString()
+
+        this.client.set(sessionId, loginResponse.accessToken, {
+            EX: TEN_MINUTES
+        })
+
+        return {
+            sessionId, 
+            user: loginResponse.user,
+            expireAt
+        }  
+    }
+
+    async register(username: string, password: string, name: string, photoUrl: string) : Promise<AuthResponseType> {
+        const loginResponse = await authApi.registerInternal(username, password, name, photoUrl)
+        return this.buildAuthResponse(loginResponse)          
+    }
+
+    async logout(sessionId : string) : Promise<void> {
+        await this.client.del(sessionId)
     }
 }
 

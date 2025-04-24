@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mulish, Alegreya } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
+import { cookies } from "next/headers";
 
 const mulish = Mulish({
     subsets: ["latin"],
@@ -18,6 +19,11 @@ export const metadata: Metadata = {
 };
 
 
+const loggedUsername = (await cookies()).get("SocialUsername")
+
+console.log(loggedUsername);
+
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -26,7 +32,7 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${mulish.variable} ${alegreya.variable}`}>
             <body suppressHydrationWarning>                
-                <Navbar></Navbar>
+                <Navbar loggedUsername={loggedUsername?.value}></Navbar>
                 {children}
             </body>
         </html>
