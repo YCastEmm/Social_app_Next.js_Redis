@@ -7,11 +7,10 @@ import * as yup from "yup" // Librería para validaciones por esquema
 
 import SubmitButton from "../form/SubmitButton"
 import InputText from "../form/InputText"
-import httpExternalApi from "@/services/common/http.external.service"
-import authApi from "@/services/auth/auth.service"
 import { AccessDeniedError } from "@/services/common/errors"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import authApi from "@/services/auth/auth.api"
 
 // Tipo que define los campos del formulario
 type FormData = {
