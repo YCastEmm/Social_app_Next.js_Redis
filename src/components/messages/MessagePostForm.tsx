@@ -2,22 +2,28 @@
 
 import useMessages from "@/contexts/message.context";
 import messageAPI from "@/services/messages/messages.service";
+import { UserType } from "@/types/user.types";
 import Image from "next/image";
 import { useEffect } from "react";
 // Importo el hook principal de React Hook Form
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation"
+
 
 type MessagePostFormType = {
     parentId?: string
+    currentUser?: UserType
 }
 
 
 // Defino el tipo de datos que espero en el formulario
 type FormData = {
-    message: string
+    message: string,
 }
 
-const MessagePostForm = ({parentId} : MessagePostFormType) => {
+const MessagePostForm = ({parentId, currentUser} : MessagePostFormType) => {
+
+    const router = useRouter()
 
     const {postMessage} = useMessages()
 
@@ -35,9 +41,24 @@ const MessagePostForm = ({parentId} : MessagePostFormType) => {
 
     // Función que se ejecuta al hacer submit del form
     const onSubmit = async (data: FormData) =>{
-        await postMessage(data.message, parentId)
+        postMessage(data.message, parentId)
         resetField("message") // limpio el campo después de enviar
         setFocus("message")   // vuelvo a enfocar el textarea
+    }
+
+    
+    const goToLogin = () =>{
+        router.push("/login")
+            router.refresh()
+    }
+
+    if (!currentUser) {
+        return  <div className="mb-4 flex flex-col items-center">
+                    <h3 className="">Iniciá sesión para escribir un mensaje</h3>
+                    <button className="button-primary mt-4 w-fit" type="submit" onClick={() => goToLogin()}>
+                            Iniciar sesión
+                    </button>
+                </div>  
     }
 
     return (
@@ -46,7 +67,7 @@ const MessagePostForm = ({parentId} : MessagePostFormType) => {
                 <Image
                     priority
                     className="rounded-full"
-                    src={"https://i.pinimg.com/564x/1b/2d/c0/1b2dc0ce77080e4a682fbbfd2eb3b0c1.jpg"}
+                    src={currentUser.photoUrl}
                     width={60}
                     height={60}
                     alt={""} />

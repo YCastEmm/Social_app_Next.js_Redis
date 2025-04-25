@@ -11,11 +11,13 @@ import Message from "@/components/messages/Message";
 import MessageList from "@/components/messages/MessageList";
 import MessagePostForm from "@/components/messages/MessagePostForm";
 import useMessages, { MessageProvider } from "@/contexts/message.context";
+import { UserType } from "@/types/user.types";
 
 type MessagePageProps = {
     repliesPage: PageType<MessageType>;
     message: MessageType;
     parentId?: string;
+    currentUser?: UserType
 };
 
 
@@ -29,12 +31,12 @@ const MessageContainer = () =>{
             </section>
 }
 
-const MessagePageContainer = ({ message, repliesPage, parentId }: MessagePageProps) => {
+const MessagePageContainer = ({ message, repliesPage, parentId, currentUser }: MessagePageProps) => {
     return (
         <MessageProvider initialPage={repliesPage} initialMessage={message}>
             <MessageContainer />
             <section>
-                <MessagePostForm parentId={parentId}></MessagePostForm>
+                <MessagePostForm parentId={parentId} currentUser={currentUser}></MessagePostForm>
             </section>
             <section className="flex flex-col w-full">
                 <MessageList />

@@ -1,6 +1,7 @@
 import { MessageType } from "@/types/message.type";
 import { PageType } from "@/types/pagination.types";
 import httpInternalApi from "../common/http.internal.service";
+import httpExternalApi from "../common/http.external.service";
 
 
 
@@ -16,7 +17,7 @@ class MessageApi {
         return httpInternalApi.httpGetPublic(`/messages/${id}/replies`,  new URLSearchParams({page: `${page}`, size: `${size}`}))}
 
     postMessage = async ( message: string, parentId?: string) : Promise<MessageType> => {
-        return httpInternalApi.httpPost("/messages", { message: message, parentId: parentId ?? null })}
+        return httpExternalApi.httpPost("/proxy/messages", { message: message, parentId: parentId ?? null })}
 
     getMessageByHash = async ( hashtag: string, page: number, size: number) : Promise<PageType<MessageType>> => {
         return httpInternalApi.httpGetPublic(`/messages/hash/${hashtag}`,  new URLSearchParams({page: `${page}`, size: `${size}`}))}

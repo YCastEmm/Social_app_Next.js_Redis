@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { AccessDeniedError } from "./services/common/errors";
 import authApi from "./services/auth/auth.api";
 
@@ -23,6 +23,12 @@ export async function middleware(request: NextRequest) {
         return getAuthenticationHeaders(request, accessToken);
 
     } catch (error) {
+        if (error instanceof AccessDeniedError) {
+            if (!request.url.endsWith("/profile")) {
+                return NextResponse.next();
+            }
+        }
+
         // Si algo falla (por ej., error al consultar el servicio), también redirijo al login
         return NextResponse.redirect(new URL("/login", request.url));
     }
@@ -46,7 +52,7 @@ const getAuthenticationHeaders = (request: NextRequest, accessToken: string) => 
     });
 };
 
-// Configuro el middleware para que se aplique solo en la ruta /profile
+
 export const config = {
-    matcher: "/profile",
+    matcher: ["/", "/messages/:path*", "/profile", "/api/proxy/:path*"] 
 };
