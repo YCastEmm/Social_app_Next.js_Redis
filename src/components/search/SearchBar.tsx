@@ -1,44 +1,42 @@
-"use client"
+"use client";
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 type FormData = {
-    query: string
-}
+    query: string;
+};
 
-type SearchBarProps ={
-    initialQuery: string | undefined
-}
+type SearchBarProps = {
+    initialQuery: string | undefined;
+};
 
-const SearchBar = ({initialQuery} : SearchBarProps) => {
+const SearchBar = ({ initialQuery }: SearchBarProps) => {
+    const router = useRouter();
 
-    const router = useRouter()
-
-    const {register, handleSubmit, setValue} = useForm<FormData>({
+    const { register, handleSubmit, setValue } = useForm<FormData>({
         defaultValues: {
-            query: initialQuery
-        }
-    })
+            query: initialQuery,
+        },
+    });
 
-    useEffect(()=>{
-            setValue("query",initialQuery ?? "")
-        },[initialQuery])
+    useEffect(() => {
+        setValue("query", initialQuery ?? "");
+    }, [initialQuery]);
 
-    const onSubmit = (data: FormData) =>{
-        router.push(`/?query=${data.query ?? ""}&type=hash`)
-    }
+    const onSubmit = (data: FormData) => {
+        router.push(`/?query=${data.query ?? ""}&type=hash`);
+    };
 
-    return  <form onSubmit={handleSubmit(onSubmit)} className="flex w-full mb-3">
-                    <input
-                        {...register("query")}
-                        placeholder={"Buscar por #Fuerza, #Jedi"}
-                        className="p-1 pl-2 w-full rounded bg-gray-50 border-2 border-gray-200 focus:border-blue-300 focus:outline-none" />
-                    <button className="ml-2 button-primary" >Buscar</button>
-            </form>
-}
+    return (
+        <form onSubmit={handleSubmit(onSubmit)} className="flex w-full mb-4">
+            <input {...register("query")} placeholder="Buscar por #Fuerza, #Jedi" className="w-full rounded-l-lg border-2 border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:border-indigo-400 focus:outline-none" />
+            <button type="submit" className="button-primary rounded-l-none rounded-r-lg">
+                Buscar
+            </button>
+        </form>
+    );
+};
 
 export default SearchBar;
-
-

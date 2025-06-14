@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { MessageType } from "@/types/message.type";
 import UserCard, { UserCardLayout } from "../users/UserCard";
@@ -10,18 +10,20 @@ type MessageProps = {
 };
 
 const Message = ({ message }: MessageProps) => {
-    const router = useRouter()
+    const router = useRouter();
+
     return (
-        <UserCard user={message.user} layout={UserCardLayout.HORIZONTAL}>
-            <div className="flex flex-col">
-                <p className="text-xs">{message.message}</p>    
-                <div className="flex justify-end">
-                    <RepliesCounter
-                        count={message.repliesCount}
-                        onClick={() => router.push(`/messages/${message.id}`)} />
+        <div className="bg-white rounded-xl p-4 shadow-sm w-full mb-4">
+            <UserCard user={message.user} layout={UserCardLayout.HORIZONTAL}>
+                <div className="flex flex-col w-full">
+                    <p className="text-sm text-gray-800 mb-2">{message.message}</p>
+
+                    <div className="flex justify-end w-full mt-auto">
+                        <RepliesCounter count={message.repliesCount} onClick={() => router.push(`/messages/${message.id}`)} />
+                    </div>
                 </div>
-            </div>
-        </UserCard>
+            </UserCard>
+        </div>
     );
 };
 

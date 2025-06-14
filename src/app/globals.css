@@ -4,67 +4,51 @@
 
 @layer components {
     body {
-        @apply font-body;
+        @apply font-body bg-gray-100 text-gray-900;
     }
 
     main {
-        @apply w-full;
-        @apply flex;
-        @apply flex-col;
-        @apply items-center;
+        @apply w-full flex flex-col items-center px-4 pb-8 gap-8;
     }
 
     section {
-        @apply px-4;
-        @apply w-full;
+        @apply w-full px-6 py-4;
     }
 
     h1 {
-        @apply text-xl;
-        @apply font-bold;
+        @apply text-2xl font-bold;
     }
 
     h2 {
-        @apply font-semibold;
-        @apply text-lg;
+        @apply text-xl font-semibold;
     }
 
     h3 {
-        @apply font-semibold;
-        @apply text-sm;
+        @apply text-base font-semibold;
     }
 
     .button-primary {
-        @apply rounded-md;
-        @apply bg-blue-500;
-        @apply text-white;
-        @apply px-6;
-        @apply py-2;
-    }
-
-    .button-primary:hover {
-        @apply bg-blue-400;
+    @apply rounded-lg text-white font-semibold px-6 py-2 shadow-md transition-all bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500;
     }
 
     .button-secondary {
-        @apply rounded-md;
-        @apply bg-gray-50;
-        @apply text-blue-500;
-        @apply px-6;
-        @apply py-2;
+        @apply rounded-lg font-semibold px-4 py-2 transition-all text-indigo-800 bg-white hover:bg-gray-100 shadow-sm;
     }
 
-    .button-secondary:hover {
-        @apply bg-gray-200;
-    }
 
     .link-primary {
-        @apply text-blue-500;
-        @apply font-semibold;
-        @apply cursor-pointer;
+        @apply text-indigo-500 font-semibold cursor-pointer hover:text-indigo-400;
     }
 
-    .link-primary:hover {
-        @apply text-blue-400;
+    .card {
+        @apply bg-white rounded-xl shadow-md p-6 mb-6;
+    }
+
+    .message {
+        @apply bg-gray-50 rounded-lg p-4 mb-4 shadow-sm;
+    }
+
+    .sidebar-box {
+        @apply bg-white rounded-xl shadow p-4 mb-6;
     }
 }

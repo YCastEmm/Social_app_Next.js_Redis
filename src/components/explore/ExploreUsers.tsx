@@ -12,14 +12,16 @@ const ExploreUsers = ({ users }: ExploreUsersProps) => {
     }
 
     return (
-        <div className="bg-gray-200 rounded-lg px-5 py-3" style={{ minWidth: 240 }}>
-            <h2 className="mb-2">A quién seguir</h2>
+        <div className="sidebar-box" style={{ minWidth: 240 }}>
+            <h2 className="mb-3 text-lg font-semibold text-gray-800">A quién seguir</h2>
+
             {users.slice(0, 4).map((user, index) => (
-                <UserCard key={`trending-user-${index}`} user={user} layout={UserCardLayout.VERTICAL}></UserCard>
+                <UserCard key={`trending-user-${index}`} user={user} layout={UserCardLayout.HORIZONTAL} />
             ))}
+
             {users.length > 4 && (
                 <Link href={"/explore?type=USERS"}>
-                    <div className="text-center link-primary">Ver más</div>
+                    <div className="text-center mt-4 link-primary">Ver más</div>
                 </Link>
             )}
         </div>

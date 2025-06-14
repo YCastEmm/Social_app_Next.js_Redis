@@ -15,20 +15,20 @@ const ExploreTrending = ({hashes} : ExploreTrendingProps) => {
     }
 
     return (
-        <div className="bg-gray-200 rounded-lg px-5 py-3" style={{minWidth: 240}}>
-            <h2 className="mb-2">Trending</h2>
-            {hashes.slice(0,2).map((hash, index) => (
-                <div className="mb-2" key={index}>
-                    <MessageHashtag hash={hash}></MessageHashtag>
+        <div className="bg-white rounded-xl shadow p-5 w-full min-w-[240px]">
+            <h2 className="mb-3 text-lg font-semibold text-gray-800">Trending</h2>
+
+            {hashes.slice(0, 2).map((hash, index) => (
+                <div className="mb-3" key={index}>
+                <MessageHashtag hash={hash} />
                 </div>
             ))}
-            {hashes.length > 2 && 
-                <Link href={"/explore?type=HASHTAG"}>
-                    <div className="text-center link-primary">
-                        Ver más
-                    </div>
+
+            {hashes.length > 2 && (
+                <Link href="/explore?type=HASHTAG">
+                <div className="text-center link-primary mt-2">Ver más</div>
                 </Link>
-            }
+            )}
         </div>
     );
 };

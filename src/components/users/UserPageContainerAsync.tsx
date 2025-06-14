@@ -18,32 +18,34 @@ const UserPageContainerAsync = async ({username}: UserPageContainerProps) => {
     const [user, userMessages, userReplies, userFollowers, userFollowing] = await Promise.all([userPromise, userMessagesPromise, userRepliesPromise, userFollowingPromise, userFollowersPromise])
 
     return (
-        <main className="flex flex-col bg-gray-100 p-8">
-            <section className="flex flex-col mb-8">
-                <div className="rounded-full mb-3 block relative w-20 h-20">
-                <Image
-                    className="rounded-full"
-                    src={user.photoUrl}
-                    alt="Imagen de perfil"
-                    fill
-                    priority
-                    />
-                </div>
-                <h2>{user.name}</h2>
-                <div className="font-semibold text-gray-600 text-lg mb-1">@{user.username}</div>
-                <div className="my-3">{user.bio}</div>
-                <div className="flex justify-between">
-                    <div className="font-semibold">{user.followersCount} Seguidores</div>
-                    <div className="font-semibold">{user.followingCount} Siguiendo</div>
-                </div>
-            </section>
-            <UserTab
-                messages={userMessages.content}
-                replies={userReplies.content}
-                followers={userFollowers.content}
-                following={userFollowing.content}>
-            </UserTab>
-        </main>
+        <main className="flex flex-col bg-gray-100 pb-8 pt-4 min-h-screen">
+    <section className="flex flex-col bg-white p-6 rounded-xl shadow-md mb-8">
+        <div className="rounded-full mb-4 w-24 h-24 relative">
+            <Image
+                className="rounded-full object-cover"
+                src={user.photoUrl}
+                alt="Imagen de perfil"
+                fill
+                priority
+            />
+        </div>
+        <h2 className="text-xl font-bold text-gray-800">{user.name}</h2>
+        <div className="font-semibold text-gray-500 text-sm mb-2">@{user.username}</div>
+        <div className="text-gray-700 text-sm mb-4">{user.bio}</div>
+        <div className="flex gap-8 text-sm font-semibold text-gray-700">
+            <div>{user.followersCount} <span className="font-normal text-gray-500">Seguidores</span></div>
+            <div>{user.followingCount} <span className="font-normal text-gray-500">Siguiendo</span></div>
+        </div>
+    </section>
+
+    <UserTab
+        messages={userMessages.content}
+        replies={userReplies.content}
+        followers={userFollowers.content}
+        following={userFollowing.content}
+    />
+</main>
+
     );
 }
 

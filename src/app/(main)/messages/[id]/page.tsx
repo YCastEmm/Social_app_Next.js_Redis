@@ -17,7 +17,7 @@ const MessagePage = async ({ params }: { params: Promise<{ id: string, parentId:
     const [repliesPage, message] = await Promise.all([repliesPagePromise, messagePromise])
 
     return (
-        <main className="flex flex-col bg-gray-100 p-8">
+        <main className="flex flex-col bg-gray-100 pt-8">
             <MessagePageContainer 
                 message={message} 
                 parentId={id}

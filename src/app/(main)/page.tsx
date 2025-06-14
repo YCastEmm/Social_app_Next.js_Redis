@@ -3,7 +3,7 @@ import IndexPageContainer from "./page.container";
 import { headers } from "next/headers";
 import userApi from "@/services/users/user.service";
 
-const IndexPage = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | undefined }> }) => {
+const IndexPage = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
 
     const { query } = await searchParams;
 
@@ -18,7 +18,7 @@ const IndexPage = async ({ searchParams }: { searchParams: Promise<{ [key: strin
 
 
     return (
-        <main className="flex flex-col bg-gray-100 p-8">
+        <main className="flex flex-col bg-gray-100 pb-8 pt-0">
             <section className="flex flex-col mb-8">
                 <IndexPageContainer 
                     initialQuery={query}

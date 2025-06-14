@@ -3,7 +3,6 @@
 import { TrendingHashtagType } from "@/types/hash.types";
 import { TrendingUserType } from "@/types/user.types";
 import { useEffect, useState } from "react";
-import MessageHashtag from "../messages/MessageHashtag";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import UserList from "../users/UserList";
@@ -34,17 +33,17 @@ const ExploreTab = ({ hashtags, users, initialTab }: ExploreTabsProp) => {
 
     
     return (
-        <>
-            <div className="flex justify-evenly mb-5">
+        <div className="bg-white rounded-xl shadow p-5 w-full">
+            <div className="flex justify-evenly mb-5 bg-white">
                 <Link href="/explore?type=HASHTAG">
                     <div 
-                        className={`cursor-pointer ${tab === TabView.HASHTAG ? "border-b-2 border-blue-400" : ""}`}>
+                        className={`cursor-pointer text-lg ${tab === TabView.HASHTAG ? "border-b-2 border-indigo-400" : ""}`}>
                         Mensajes
                     </div>
                 </Link>
                 <Link href="/explore?type=USERS">
                     <div 
-                        className={`cursor-pointer ${tab === TabView.USERS ? "border-b-2 border-blue-400" : ""}`}>
+                        className={`cursor-pointer text-lg ${tab === TabView.USERS ? "border-b-2 border-indigo-400" : ""}`}>
                         Usuarios
                     </div>
                 </Link>
@@ -54,8 +53,9 @@ const ExploreTab = ({ hashtags, users, initialTab }: ExploreTabsProp) => {
                 { tab === TabView.USERS && <UserList initialUserPage={users} /> }
                 <div />
             </div>
-        </>
+        </div>
     );
 };
 
 export default ExploreTab;
+

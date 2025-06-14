@@ -2,8 +2,7 @@ import ExploreTrending from "@/components/explore/ExploreTrending";
 import ExploreUsers from "@/components/explore/ExploreUsers";
 import Menu from "@/components/menu/Menu";
 import exploreApi from "@/services/explore/explore.service";
-import userApi from "@/services/users/user.service";
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 import Link from "next/link";
 import { FC, PropsWithChildren } from "react";
 
@@ -26,22 +25,17 @@ const UsersLayout: FC<PropsWithChildren> = async ({ children }) => {
     
     return (
         <div  className="w-full h-full grid grid-cols-12 gap-4 px-4">
-            <div className="col-span-2">
+            <div className="col-span-2 py-4">
                 <Menu links={LINKS}></Menu>
             </div>
             <main className="col-span-8">{children}</main>
-            <div className="col-span-2">
+            <div className="col-span-2 py-4">
                 <div className="mb-4">
                     <ExploreTrending hashes={hashes.content}></ExploreTrending>
                 </div>
                 <div className="mb-4">
                     <ExploreUsers users={users.content}></ExploreUsers>
-                </div>
-                <Link href="/faq">
-                    <div className="link-primary">
-                        Preguntas frecuentes
-                    </div>
-                </Link>
+                </div>                
             </div>
         </div>
     );
