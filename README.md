@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Red Social con Next.js + TypeScript + Redis
 
-## Getting Started
+Este proyecto es una red social de escritorio, como muestra de un desarrollo personal. El objetivo principal es explorar el uso de Next.js en integración con otras tecnologías, como Redis para la gestión de sesiones y un backend modularizado. Integra autenticación de usuarios, manejo de sesiones, protección de rutas mediante middleware y una estructura que separa la lógica de negocio, las llamadas HTTP y el control de accesos.
+<br>
+<br>
 
-First, run the development server:
+## 📦 ¿Qué incluye el proyecto?
+
+- Registro y login de usuarios con persistencia de sesión
+- Generación de tokens y almacenamiento en Redis
+- Middleware en Next.js que protege rutas sensibles
+- Comunicación segura entre backend y frontend mediante token de autorización simulado
+- Cookies de sesión para mantener al usuario autenticado
+- Lógica desacoplada: separación clara entre API, servicios y controladores
+- Validación de sesiones a través de Redis local
+- Logs y manejo de errores definidos
+- Estructura modular y escalable
+<br>
+<br>
+
+## ⚙️ Tecnologías utilizadas
+
+- **Next.js**
+- **TypeScript**
+- **Node.js**
+- **Docker**
+- **Redis (para sesiones)**
+- **PostgreSQL (como db principal)**
+- **Tailwind CSS**
+- **YUP**
+<br>
+<br>
+
+## 🚀 ¿Cómo levantar el proyecto?
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/YCastEmm/Social_app_Next.js_Redis
+cd Social_app_Next.js_Redis
+```
+
+### 2. Instalar dependencias
+
+```bash
+npm install
+```
+
+### 3. Crear archivo `.env`
+
+En la raíz del proyecto, crear un archivo `.env` con la siguiente variable:
+
+```
+REDIS_API_TOKEN=unTokenCualquieraParaSimular
+```
+
+Este token no es real ni se conecta a servicios externos. Simplemente se simula el flujo de autorización. El valor puede ser cualquier string.
+
+### 4. Levantar los contenedores de Docker
+
+Para poder levantar los servicios necesarios (como Redis), este proyecto utiliza Docker. Si no tenés Docker instalado, descargalo desde https://www.docker.com y asegurate también de tener Docker Compose habilitado.  
+  
+Después ejecutá en la consola:
+
+```bash
+docker-compose up --build
+```  
+
+### 5. Ejecutar la app
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 6. Iniciar sesión en la plataforma
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Podés usar uno de los siguientes usuarios de prueba para ingresar:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Usuario: `yoda`  
+- Usuario: `anakin`  
+- Usuario: `solo`  
+- Contraseña (para todos): `Test123` 
+<br>
+<br>
 
-## Learn More
+## 🔐 ¿Cómo funciona la autenticación?
 
-To learn more about Next.js, take a look at the following resources:
+1. El usuario se registra o inicia sesión desde el frontend.
+2. El backend valida las credenciales y genera un `accessToken`.
+3. Ese token se guarda en Redis, usando como clave un `sessionId` generado con UUID.
+4. El `sessionId` se guarda como cookie en el navegador.
+5. Al acceder a rutas protegidas como `/profile`, el middleware recupera el `sessionId` de la cookie y lo usa para consultar Redis.
+6. Si la sesión está activa, deja pasar y agrega el token como header (`x-social-access-token`).
+7. Si no está, redirige automáticamente al login.
+<br>
+<br>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 💻 Autor  
+Desarrollado por **Yair Castagnola**
