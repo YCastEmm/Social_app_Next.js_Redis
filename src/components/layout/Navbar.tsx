@@ -22,7 +22,6 @@ const Navbar = ({ loggedUsername }: NavbarProps) => {
             <nav className="flex items-center justify-between max-w-screen-xl mx-auto text-white px-6 py-4">
                 <Link href="/explore" className="flex items-center gap-2 cursor-pointer">
                     <img src="/logo.png" alt="Logo SocialApp" className="h-10 w-auto" />
-                    <span className="text-white ml-3 font-semibold text-3xl">SocialApp</span>
                 </Link>
 
                 {loggedUsername && (

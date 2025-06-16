@@ -18,7 +18,17 @@ const UserCard = ({ user, layout, children }: UserCardProps) => {
 
     return (
         <div className={`flex w-full ${isHorizontal ? "flex-row items-start gap-3" : "flex-col items-start"} mb-4`}>
-            <Image priority className="rounded-full object-cover" src={user.photoUrl} width={48} height={48} alt={user.name} />
+            <div className="w-12 h-12 min-w-12 min-h-12 rounded-full overflow-hidden shadow-md flex-shrink-0 border-indigo-400 border-[2px] mt-1">
+                <Image
+                    src={user.photoUrl}
+                    alt={user.name}
+                    width={48}
+                    height={48}
+                    className="object-cover w-full h-full"
+                    priority
+                />
+            </div>
+
 
             <div className={`flex flex-col w-full ${isHorizontal ? "mt-1" : ""}`}>
                 <h3 className="text-sm font-semibold">{user.name}</h3>

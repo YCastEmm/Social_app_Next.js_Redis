@@ -49,7 +49,7 @@ const UserList = ({initialUserPage}: UserListProps) => {
             releaseToRefreshContent={<h3 style={{ textAlign: "center" }}>&#8593; Suelta para refrescar</h3>}
         >
             {users.map((user, index) => (
-                <UserCard user={user} key={`explore-user-${index}`} layout={UserCardLayout.VERTICAL} />
+                <UserCard user={user} key={`explore-user-${index}`} layout={UserCardLayout.HORIZONTAL} />
             ))}
         </InfiniteScroll>
     );

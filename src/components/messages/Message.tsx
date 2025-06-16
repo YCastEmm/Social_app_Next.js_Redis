@@ -13,7 +13,7 @@ const Message = ({ message }: MessageProps) => {
     const router = useRouter();
 
     return (
-        <div className="bg-white rounded-xl p-4 shadow-sm w-full mb-4">
+        <div className="bg-white rounded-xl p-4 pb-1 shadow-sm w-full mb-4">
             <UserCard user={message.user} layout={UserCardLayout.HORIZONTAL}>
                 <div className="flex flex-col w-full">
                     <p className="text-sm text-gray-800 mb-2">{message.message}</p>
